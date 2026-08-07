@@ -1,17 +1,211 @@
 <!DOCTYPE html>
-<html>
-<head><title>balls</title></head>
-<body><h1>boobies</h1>
-  <style>
-     body {
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>hafe's fun project v0.3</title>
+    <link rel="icon" type="image/png" href="2.png">
+    <style>
+        body {
             margin: 0;
             padding: 0;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: -50%;
+            left: -50%;
+            width: 300%;
+            height: 300%;
             background-image: url('1.png');
             background-repeat: repeat;
-            background-size: auto;
-            background-position: top left;
-            min-height: 100vh;
+            background-size: 300px auto;
+            transform: rotate(45deg);
+            z-index: -2;
         }
-  </style>
+
+        .pink-text {
+            color: pink;
+            position: relative;
+            z-index: 1;
+        }
+
+        .top-right-icon {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .top-right-icon img {
+            width: 80px;
+            height: 80px;
+        }
+
+        .login-popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: pink;
+            padding: 40px;
+            border-radius: 0px;
+            z-index: 999;
+            text-align: center;
+            box-shadow: 0 0 0 0;
+        }
+
+        .login-popup h1 {
+            margin: 0 0 20px 0;
+            font-family: "Times New Roman", serif;
+            font-size: 32px;
+        }
+
+        .login-popup input {
+            display: block;
+            margin: 10px auto;
+            padding: 8px;
+            border: 2px solid black;
+            border-radius: 0px;
+            font-family: "Times New Roman", serif;
+            width: 200px;
+        }
+
+        .done-button {
+            display: block;
+            margin: 20px auto 0 auto;
+            padding: 10px 30px;
+            background-color: white;
+            border: 2px solid black;
+            border-radius: 0px;
+            font-family: "Times New Roman", serif;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        .music-box {
+            position: fixed;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(255, 192, 203, 0.5);
+            padding: 20px;
+            border-radius: 0px;
+            z-index: 998;
+            text-align: center;
+            border: 2px solid black;
+        }
+
+        .music-box h2 {
+            margin: 0 0 15px 0;
+            font-family: "Times New Roman", serif;
+            font-size: 24px;
+        }
+
+        .music-option {
+            display: block;
+            margin: 10px auto;
+            padding: 8px 20px;
+            background-color: white;
+            border: 2px solid black;
+            border-radius: 0px;
+            font-family: "Times New Roman", serif;
+            font-size: 16px;
+            cursor: pointer;
+            width: 150px;
+        }
+    </style>
+</head>
+<body>
+
+    <a href="https://t.me/ilovegripen" class="top-right-icon">
+        <img src="3.png" alt="icon">
+    </a>
+
+    <p class="pink-text">hello vr welcome to my site br</p>
+
+    <div class="login-popup">
+        <h1>login for tuff sh gng</h1>
+        <input type="text" placeholder="credit card number bro" id="input1">
+        <input type="password" placeholder="cvv2?" id="input2">
+        <button class="done-button">done</button>
+    </div>
+
+    <div class="music-box">
+        <h2>check out this tuff ahh music playing box</h2>
+        <button class="music-option" onclick="playSong1()">bad apple</button>
+        <button class="music-option" onclick="playSong2()">destiny</button>
+    </div>
+
+    <audio id="audio1" autoplay loop>
+        <source src="1.mp3" type="audio/mpeg">
+    </audio>
+
+    <audio id="audio2" loop>
+        <source src="2.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        const audio1 = document.getElementById('audio1');
+        const audio2 = document.getElementById('audio2');
+        
+        audio1.volume = 1.0;
+        audio2.volume = 1.0;
+        
+        function forcePlay() {
+            audio1.play().catch(() => {});
+            audio1.volume = 1.0;
+        }
+        
+        // Try to play immediately
+        forcePlay();
+        
+        // If browser blocks autoplay, force it on any interaction
+        document.addEventListener('click', forcePlay, { once: true });
+        document.addEventListener('keydown', forcePlay, { once: true });
+        
+        // Keep volume at max
+        audio1.addEventListener('volumechange', () => {
+            audio1.volume = 1.0;
+        });
+        
+        audio2.addEventListener('volumechange', () => {
+            audio2.volume = 1.0;
+        });
+        
+        // Extra safety loop
+        audio1.addEventListener('ended', () => {
+            audio1.currentTime = 0;
+            audio1.play();
+            audio1.volume = 1.0;
+        });
+        
+        audio2.addEventListener('ended', () => {
+            audio2.currentTime = 0;
+            audio2.play();
+            audio2.volume = 1.0;
+        });
+
+        function playSong1() {
+            audio2.pause();
+            audio2.currentTime = 0;
+            audio1.currentTime = 0;
+            audio1.play();
+            audio1.volume = 1.0;
+        }
+
+        function playSong2() {
+            audio1.pause();
+            audio1.currentTime = 0;
+            audio2.currentTime = 0;
+            audio2.play();
+            audio2.volume = 1.0;
+        }
+    </script>
+
 </body>
 </html>
